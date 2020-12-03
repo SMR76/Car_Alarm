@@ -12,6 +12,7 @@
 \usepackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{geometry}
 \usepackage{outlines}
 \usepackage{enumitem}
 \usepackage{fancyvrb}
@@ -93,6 +94,29 @@
 \renewcommand{\nomname}{فهرست علائم}
 \nomenclature{$\bullet$}{bullet}
 
+%% ugly chapter style for chapters :D
+% --------- chapter renew command -------------
+\newcommand{\opchapter}[1]{\newpage%
+	\topskip0pt%
+	\vspace*{\fill}%
+	\addtocounter{chapter}{1}%
+	\begin{center}%
+		\textbf{\huge{\color{gray}{فصل \thechapter \\[1cm] \uppercase{#1}}}}%
+	\end{center}%
+	\vspace*{\fill}%
+	\newpage%
+	\textbf{\Large{\thechapter. #1}}%
+	\addcontentsline{toc}{chapter}{#1}%
+}
+
+\geometry{
+	a4paper,
+	top		= 35mm,
+	right	= 35mm,
+	bottom	= 25mm,
+	left	= 25mm,
+}
+
 
 \begin{document}
 	\lstset{
@@ -154,26 +178,55 @@
 	\newpage
 	\pagenumbering{arabic}
 
-	\chapter{
+	\opchapter{
 	معرفی
 	}\label{chap1}
 
 	\section{
 	شرح کلی پروژه
 	}\label{sec1:chap1}
-	این پروژه به منظور پیاده سازی یک سیستم دزدگیر ماشین است.
+	این پروژه در حول پیاده سازی یک سیستم هشدار خودرو یا در اصطلاح دزدگیر خودرو است.
 	پروژه شامل دو بخش پیاده سازی سخت‌افزاری دزدگیر و هسته اصلی و پیاده سازی بخش نرم‌افزاری به صورت
 	\lr{android application}
 	به منظور کنترل بهتر بخش سخت‌افزاری در نظر گرفته شده‌است.
 
-	این دزدگیر باید امکان مکان‌یابی و مشاهده وضعیت خودرو از طریق
-	\lr{application}
-	را به کاربر بدهد.
-	\section{
-	دلایل و اهداف انتخاب پروژه
-	}\label{sec2:chap1}
-		از دلایل انتخاب این موضوع آشنایی بیشتر و بهتر با مباحث سخت‌افزار و پیاده سازی آن و ارتباط با یک نرم‌افزار می‌باشد.
+	معمولاً این نوع دستگاه‌ها به منظور فقط کاربرد هشدار دادن استفاده می‌شود، اما از طرفی سهولت استفاده از خودرو نیز مد نظر طراحان این نوع دستگاه قرار دارد.
 
+	دزدگیر‌های خودرو به نوعی از عصر ورود ماشین‌ها به بازار آمدند، یک دزدگیر در دو نوع کارخانه و پس از فروش بر روی خودرو متصل می‌شوند.
+
+	در حالت کارخانه عموماً امکانات ساده‌ای مانند هشدار در صورت ضربه و بازکردن درها قرار دارد، مابقی امکانات
+
+	در این پروژه باید امکان مکان‌یابی و مشاهده وضعیت خودرو از طریق
+	\lr{application}
+	به کاربر اطلاع داده شود.
+
+
+	\section{
+	اهداف
+	}\label{sec2:chap1}
+	امروزه دزدگیر خودرو به یک استاندارد و یک وسیله مورد نیاز هر خودرو شخصی بدل شده‌است،
+	از طرفی طی چند سال عملکرد‌های دزدگیر خودرو بهبود یافته‌است،‌ تا حدی که در ارسال دستورات
+\lr{remote}
+	از رمزنگاری و روش‌های پنهان سازی دستورات برای جلوگیری از دزدی و حملات مخرب صورت گرفته است.
+	اهداف این پروژه، به طور خلاصه و کلی شامل:
+	\begin{itemize}[nosep]
+		\item
+		پیاده سازی هرچه ارزانتر محصول نهایی، که منوت به استفاده تراشه‌های ارزان قیمت در محصول می شود.
+		\item
+		ایجاد یک روش و رمزنگاری مناسب سیگنال ارسالی به وسیله
+		\lr{remote}.
+		\item
+		کنترل حدالامکان خودرو با استفاده از
+		\lr{application}.
+		\item
+		و همچنین استفاده از زبان
+		\lr{C/C++}
+		به منظور
+		\lr{performance}
+		بالا و کارکرد اجرایی.
+	\end{itemize}
+
+		در انتها هدف این پروژه پیاده سازی این دزدگیر با بهترین شرایط کنترل خودرو و ایجاد یک رمزنگاری بهبودیافته نسبت به مابقی سیستم‌ها است، که از طرفی امکان کنترل مناسب خودرو به نسبت دیگر محصولات با قیمت هم سطح را فراهم کند.
 	\section{
 	پروژه‌های مشابه موجود
 	}\label{sec3:chap1}
@@ -181,9 +234,6 @@
 	\subsection{
 		\lr{Viper 5906V}
 	}\label{subsec1:sec3:chap1}
-	\subsubsection{
-		معرفی
-	}\label{subsubsec1:subsec1:sec3:chap1}
 	این دزدگیر محصول کمپانی
 	\lr{Directed Electronics}
 	است که با قیمت معادل با
@@ -199,9 +249,6 @@
 	\lr{application}
 	به منظور تنظیم و کنترل راحت‌تر دزدگیر به وسیله تلفن همراه هوشمند تعبیه شده است.
 	\cite{ViperCar35:online}
-	\subsubsection{
-		عکس‌ها
-	}\label{subsubsec2:subsec1:sec3:chap1}
 	\begin{figure}[!h]
 		\centering
 		\footnotesize
@@ -269,12 +316,13 @@
 
 	\subsubsection{
 		امکانات
-	}\label{subsubsec3:subsec1:sec3:chap1}
+	}\label{subsubsec1:subsec1:sec3:chap1}
 	\begin{itemize}[nosep]\label{item1:subsec1:sec3:chap1}
 		\item
 			محافظت از سرقت خودرو (مانند ایجاد هشدار و..).
 		\item
-			ریموت دوطرفه.
+			\lr{remote}
+			 دوطرفه.
 		\item
 			رمزنگاری.
 		\item
@@ -307,12 +355,12 @@
 	\subsection{
 		\lr{Python 5760P}
 	}\label{subsec2:sec3:chap1}
-	\subsubsection{
-		معرفی
-	}\label{subsubsec1:subsec2:sec2:chap1}
+
 	دزدگیر
 	\lr{Python 5760P}
-	یکی دیگر از ریموت‌ها و  ساخته شده توسط کمپانی
+	یکی دیگر از انواع
+	\lr{remote}
+	و  ساخته شده توسط کمپانی
 	\lr{Directed Electronics}
 	این دزدگیر هم مانند
 	\lr{Viper 5906V}
@@ -326,9 +374,7 @@
 	\lr{OLED}
 	رنگی برای نمایش اطلاعات اشاره کرد.
 	\cite{PythonHo3:online}
-	\subsubsection{
-		عکس‌ها
-	}\label{subsubsec2:subsec2:sec3:chap1}
+
 	\begin{figure}[!h]
 		\label{fig1:subsec2:sec3:chap1}
 		\begin{center}
@@ -338,7 +384,7 @@
 	\end{figure}
 	\subsubsection{
 		امکانات
-	}\label{subsubsec3:subsec2:sec3:chap1}
+	}\label{subsubsec1:subsec2:sec3:chap1}
 	\begin{itemize}[nosep]\label{item1:subsec2:sec3:chap1}
 		\item
 		محافظت از سرقت خودرو (مانند ایجاد هشدار و..).
@@ -368,9 +414,6 @@
 	\subsection{
 		\lr{Avital 3100LX}
 	}\label{subsec3:sec3:chap1}
-	\subsubsection{
-		معرفی
-	}\label{subsubsec1:subsec3:sec3:chap1}
 	دستگاه
 	\lr{carlock}
 	یک دزدگیر و تحلیل‌گر خودرو است که به صورت یک
@@ -400,9 +443,7 @@
 	$19.90\$$
 	به فروش می‌رسند.
 	\cite{carAlarm:online}
-	\subsubsection{
-		عکس‌ها
-	}\label{subsubsec2:subsec3:sec3:chap1}
+
 	\begin{figure}[!h]
 		\centering
 		\footnotesize
@@ -491,23 +532,39 @@
 			ردیابی خودرو.
 		\item
 			کنترل برخی از عملکرد‌های خودرو.
+
+			این بخش شامل عملکرد‌هایی که
+			\lr{ECU}\LTRfootnote{engine control unit \TNR/endʒɪn kənˈtrəʊl ˈjuːnɪt/.}
+			در اختیار قرار می‌دهد می‌باشد،‌ مانند جلوگیری از روشن شدن خودرو، یا خاموش کردن خودرو در صورت نیاز و تایید کاربر.
 		\item
 			گزارش وضعیت خودرو.
 		\item
 			کنترل ماژول اصلی به وسیله
 			\lr{remote controller}.
+			که شامل روشن‌کردن موقت ماشین، بازکردن درها و شیشه‌ها، هشدار اعلان ماشین و ... می‌باشد.
 		\item
-			اعمال پیشگیری از سرقت خودرو (مانند به صدا در آمدن هشدار و...)
+			اعمال پیشگیری از سرقت خودرو (مانند به صدا در آمدن هشدار و...)، که شامل امکانات ابتدایی در دزدگیر است.
 		\item
 			رمزنگاری ارتباط رادیویی و
 			\lr{blutooth}.
+			در این قسمت سعی می‌شود بهینه سازی‌هایی در ارسال دستورات
+			\lr{remote}
+			 از طریق ماژول رادیویی انجام داد.
 	\end{itemize}
 	\section{
 		تکنولوژی‌های مورد استفاده
 	}\label{sec5:chap1}
 
-	\subsection{
-		\lr{Qt/C++}}\label{subsec1:sec5:chap1}
+	\begin{enumerate}[nosep]
+		\item
+			\hyperref[subsec1:sec5:chap1]{\lr{Qt/C++}}
+		\item
+			\hyperref[subsec2:sec5:chap1]{\lr{QML}}
+		\item
+			\hyperref[subsec3:sec5:chap1]{\lr{ARM}}
+	\end{enumerate}
+
+	\subsection{\lr{Qt/C++}}\label{subsec1:sec5:chap1}
 		فریم‌ورک
 		\LTRfootnote{ freamwork\TNR /ˈfrāmˌwərk/.}
 		محبوب
@@ -620,7 +677,8 @@
 	برای طراحی مدار نیز نرم‌افزار
 	\lr{Altium Designer}
 	مد نظر قرار گرفته شده‌است که محیط مناسب برای طراحی حرفه‌ای مدار را فراهم می‌کند.
-%	\begin{enumerate}[nosep]\label{enum1:sec0:chap0}
+
+%	\begin{enumerate}[nosep]\label{enum‍1:sec0:chap0}
 %		\item
 %	\end{enumerate}
 %
